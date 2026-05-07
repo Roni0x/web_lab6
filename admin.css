@@ -1,0 +1,271 @@
+/* 
+ * АДМИН-ПАНЕЛЬ - ЗЕЛЁНО-СЕРЫЙ ДИЗАЙН
+ */
+
+/* Контейнер админ-панели */
+.admin-panel {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Стили для статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #2d6a4f;
+    font-size: 16px;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d6a4f;
+}
+
+/* Таблица пользователей */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: top;
+}
+
+th {
+    background: #f8f9fa;
+    color: #2d6a4f;
+    font-weight: 600;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+/* Бейджи языков */
+.lang-badge {
+    display: inline-block;
+    background: #e9ecef;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin: 2px;
+    color: #2d6a4f;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 2px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-edit {
+    background: #40916c;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #2d6a4f;
+}
+
+.btn-delete {
+    background: #e63946;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c1121f;
+}
+
+.btn-save {
+    background: #2d6a4f;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #1b4d3e;
+}
+
+.btn-cancel {
+    background: #e9ecef;
+    color: #2d6a4f;
+}
+
+.btn-cancel:hover {
+    background: #dee2e6;
+}
+
+/* Форма редактирования */
+.edit-form {
+    background: #fefae0;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.edit-form h3 {
+    color: #2d6a4f;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.edit-form input, 
+.edit-form select, 
+.edit-form textarea {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: white;
+}
+
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+    outline: none;
+    border-color: #52b788;
+}
+
+/* Сообщения */
+.message {
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.message.success {
+    background: #d8f3dc;
+    color: #1b4332;
+    border-left: 5px solid #40916c;
+}
+
+.message.error {
+    background: #ffe6e6;
+    color: #c1121f;
+    border-left: 5px solid #e63946;
+}
+
+/* Навигация */
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-links h1 {
+    margin: 0;
+    color: #2d6a4f;
+}
+
+.back-link {
+    color: #40916c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Сетка для формы редактирования */
+.edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.edit-full-width {
+    grid-column: span 2;
+}
+
+/* Кнопки формы редактирования */
+.edit-buttons {
+    margin-top: 15px;
+    text-align: right;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .admin-panel {
+        padding: 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .edit-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .edit-full-width {
+        grid-column: span 1;
+    }
+    
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+.error-text {
+    color: #e63946;
+    font-size: 11px;
+}
+
+td.error {
+    background-color: #ffe6e6;
+}
+/* Кнопка входа как администратор */
+.auth-btn-admin {
+    background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+    color: white;
+}
+
+.auth-btn-admin:hover {
+    background: linear-gradient(135deg, #1b4d3e 0%, #2d6a4f 100%);
+    transform: translateY(-1px);
+}
+

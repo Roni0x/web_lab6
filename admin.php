@@ -34,12 +34,12 @@ function getDB() {
     // Если соединение ещё не установлено - создаём новое
     if ($pdo === null) {
         $pdo = new PDO(
-            "mysql:host=$db_host;dbname=$db_name;charset=utf8",  // DSN (Data Source Name)
+            "mysql:host=$db_host;dbname=$db_name;charset=utf8",  // DSN строка подключения, где указаны: драйвер (mysql), хост, имя БД и кодировка (utf8).
             $db_user,   // Логин
             $db_pass,   // Пароль
             [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // Включаем режим исключений
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC  // Результат в виде ассоциативного массива
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // все ошибки БД будут выбрасывать исключения (PDOException),
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC  // по умолчанию результаты запросов будут возвращаться как ассоциативные массивы (ключи — названия полей таблицы).
             ]
         );
     }
@@ -52,7 +52,7 @@ function getDB() {
  * Браузер сам показывает окно для ввода логина и пароля
  * 
  * Процесс:
- * 1. Браузер отправляет заголовки PHP_AUTH_USER и PHP_AUTH_PW
+ * 1. Браузер отправляет заголовки PHP_AUTH_USER и PHP_AUTH_PW,
  * 2. Сервер проверяет логин и пароль в таблице admin
  * 3. Если неверно - отправляет заголовок 401 Unauthorized
  * 4. Браузер снова показывает окно входа
@@ -117,6 +117,7 @@ try {
         
         $message = "Пользователь ID $user_id успешно удален.";
         $message_type = "success";
+        //Сначала удаляются связи пользователя с языками (user_languages), затем сам пользователь (users).
     }
     
     // ---------------- РЕДАКТИРОВАНИЕ ПОЛЬЗОВАТЕЛЯ ----------------
@@ -204,7 +205,7 @@ try {
             
             // Очищаем старые связи пользователя с языками
             $db->prepare("DELETE FROM user_languages WHERE user_id = ?")->execute([$user_id]);
-            
+            //сначала получают ID языков из languages, затем в цикле добавляют записи в user_languages;транзакция подтверждается (commit());
             // Вставляем новые связи (выбранные языки)
             if (!empty($valid_langs)) {
                 // Создаём строку плейсхолдеров (?,?,? для каждого языка)
@@ -240,7 +241,7 @@ try {
         // JOIN - объединяет таблицы languages и user_languages
         $stmt = $db->prepare("
             SELECT l.name FROM languages l 
-            JOIN user_languages ul ON l.id = ul.language_id 
+            JOIN user_languages ul ON l.id = ul.language_id //LEFT JOIN включает языки, которые ещё никто не выбрал (счётчик будет 0); 
             WHERE ul.user_id = ?
         ");
         $stmt->execute([$user['id']]);
